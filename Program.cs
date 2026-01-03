@@ -1,9 +1,61 @@
-using System;
 using System.Threading;
 using nanoFramework.M5Stack;
 using nanoFramework.Hardware.Esp32;
 
 using Console = nanoFramework.M5Stack.Console;
+
+Fire.InitializeScreen();
+Console.Clear();
+
+// Initialize M5Stack Fire
+Console.WriteLine("M5Stack Fire - RGB LED Bar Example");
+Console.WriteLine("===================================");
+Console.WriteLine("The M5Stack Fire has 10 SK6812 RGB LEDs on the side.");
+Console.WriteLine("");
+
+// LED bar configuration for M5Stack Fire
+const int LED_COUNT = 10;
+// const int LED_PIN = 15; // GPIO 15 for LED bar
+
+Console.WriteLine("Starting LED animations...");
+Console.WriteLine("");
+
+int animation = 0;
+
+while (true)
+{
+    switch (animation % 5)
+    {
+        case 0:
+            Console.WriteLine("Animation: Rainbow cycle");
+            RainbowCycle();
+            break;
+
+        case 1:
+            Console.WriteLine("Animation: Color wipe - Red");
+            ColorWipe(255, 0, 0);
+            break;
+
+        case 2:
+            Console.WriteLine("Animation: Color wipe - Green");
+            ColorWipe(0, 255, 0);
+            break;
+
+        case 3:
+            Console.WriteLine("Animation: Color wipe - Blue");
+            ColorWipe(0, 0, 255);
+            break;
+
+        case 4:
+            Console.WriteLine("Animation: Theater chase");
+            TheaterChase(255, 255, 255);
+            break;
+    }
+
+    animation++;
+    Thread.Sleep(1000);
+    Console.Clear();
+}
 
 RgbColor Wheel(int pos, int v)
 {
@@ -22,69 +74,6 @@ RgbColor Wheel(int pos, int v)
         pos -= 170;
         return new RgbColor((byte)(pos * 3), (byte)(255 - pos * 3), 0);
     }
-}
-
-Fire.InitializeScreen();
-Console.Clear();
-
-// Initialize M5Stack Fire
-Console.WriteLine("M5Stack Fire - RGB LED Bar Example");
-Console.WriteLine("===================================");
-Console.WriteLine("The M5Stack Fire has 10 SK6812 RGB LEDs on the side.");
-Console.WriteLine("");
-
-// LED bar configuration for M5Stack Fire
-const int LED_COUNT = 10;
-// const int LED_PIN = 15; // GPIO 15 for LED bar
-
-try
-{
-    // Note: This is a simplified example. For actual SK6812 control,
-    // you would need a proper WS2812/SK6812 library that uses RMT or SPI.
-    // This example shows the pattern and structure.
-
-    Console.WriteLine("Starting LED animations...");
-    Console.WriteLine("");
-
-    int animation = 0;
-
-    while (true)
-    {
-        switch (animation % 5)
-        {
-            case 0:
-                Console.WriteLine("Animation: Rainbow cycle");
-                RainbowCycle();
-                break;
-
-            case 1:
-                Console.WriteLine("Animation: Color wipe - Red");
-                ColorWipe(255, 0, 0);
-                break;
-
-            case 2:
-                Console.WriteLine("Animation: Color wipe - Green");
-                ColorWipe(0, 255, 0);
-                break;
-
-            case 3:
-                Console.WriteLine("Animation: Color wipe - Blue");
-                ColorWipe(0, 0, 255);
-                break;
-
-            case 4:
-                Console.WriteLine("Animation: Theater chase");
-                TheaterChase(255, 255, 255);
-                break;
-        }
-
-        animation++;
-        Thread.Sleep(1000);
-    }
-}
-catch (Exception ex)
-{
-    Console.WriteLine($"Error: {ex.Message}");
 }
 
 void SetLedColor(int ledIndex, byte r, byte g, byte b)
