@@ -121,7 +121,7 @@ M5Stackデバイスに対応したブートローダを書き込むには、以�
 --fwversionはわからない場合は省略可能です。
 
 ```bash
-nanoff --update --target ESP32_PSRAM_REV3 --fwversion 1.14.0.179 --serialport [serialport] --baud 115200 --masserase
+nanoff --update --target M5Core2 --fwversion 1.14.0.179 --serialport [serialport] --baud 115200 --masserase
 ```
 
 ## ビルド
