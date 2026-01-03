@@ -1,9 +1,5 @@
 using System;
-using System.Device.Spi;
-using System.Diagnostics;
-using System.Drawing;
 using System.Threading;
-
 using nanoFramework.M5Stack;
 using nanoFramework.Hardware.Esp32;
 
