@@ -51,10 +51,7 @@ while (true)
             TheaterChase(255, 255, 255);
             break;
     }
-
     animation++;
-    Thread.Sleep(1000);
-    Console.Clear();
 }
 
 RgbColor Wheel(int pos, int v)
@@ -82,6 +79,8 @@ void SetLedColor(int ledIndex, byte r, byte g, byte b)
     // In a real implementation, this would send data to SK6812 LEDs
     // using RMT or SPI to generate the precise timing required
     Console.WriteLine($"  LED {ledIndex}: R={r}, G={g}, B={b}");
+    Thread.Sleep(1000);
+    Console.Clear();
 }
 
 void RainbowCycle()
